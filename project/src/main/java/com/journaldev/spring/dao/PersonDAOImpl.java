@@ -25,8 +25,18 @@ public class PersonDAOImpl implements PersonDAO {
 	@Override
 	public void addPerson(Person p) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-		logger.info("Person saved successfully, Person Details="+p);
+		
+		List<Person> personsList = new ArrayList<Person>();
+		personsList = session.createQuery("from Person").list();
+		for (String pers : personsList) {
+			if(pers.equal(p.getCountry()) {
+				logger.info("el pais ya existe");
+			}else{
+			logger.info("Person saved successfully, Person Details="+p);
+			session.persist(p);
+			}
+		}
+		
 	}
 
 	@Override
